@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    command: bundle exec rails server -b 0.0.0.0
+    platform: linux/amd64
+    volumes:
+      - .:/app
+      - ./config/application.yml:/app/config/application.yml
+      - gem-cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    # networks:
+    #   - docker-dev_default # Connect to the existing network
+
+volumes:
+  gem-cache:
+# networks:
+#   docker-dev_default:
+#     external: true # Declare the network as external
