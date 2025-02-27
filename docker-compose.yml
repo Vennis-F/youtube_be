@@ -4,17 +4,46 @@ services:
     build: .
     command: bundle exec rails server -b 0.0.0.0
     platform: linux/amd64
+    environment:
+      RAILS_ENV: development
+      REDIS_URL: redis://redis:6379/0
     volumes:
       - .:/app
       - ./config/application.yml:/app/config/application.yml
       - gem-cache:/usr/local/bundle
     ports:
       - "3000:3000"
-    # networks:
-    #   - docker-dev_default # Connect to the existing network
+    tmpfs:
+      - /app/tmp
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: youtube_db_development
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    restart: always
+    image: redis:6.0-alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - "../volumes/redis:/data"
+      - "./redis.conf:/usr/local/etc/redis/redis.conf"
+
+  mailcatcher:
+    container_name: mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"
 
 volumes:
   gem-cache:
-# networks:
-#   docker-dev_default:
-#     external: true # Declare the network as external
+  pg-data:
