@@ -1,0 +1,17 @@
+:concurrency: 20
+
+:queues:
+  - critical
+  - mailers
+  - default
+  - searchkick
+  - low
+
+development:
+  :concurrency: 10
+staging:
+  :concurrency: 10
+uat:
+  :concurrency: 10
+production:
+  :concurrency: 10
