@@ -19,6 +19,15 @@ class V1::Api < Grape::API
            404)
   end
 
+  helpers do
+    def format_timestamp(resource)
+      resource.to_i if resource.present?
+    end
+  end
+
+  # mount all apis don't need authentication
+
   # mount all apis need authentication below the before filter
   mount V1::UsersApi
+  mount V1::VideosApi
 end
