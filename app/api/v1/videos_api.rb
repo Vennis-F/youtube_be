@@ -23,10 +23,8 @@ class V1::VideosApi < Grape::API
       requires :url, type: String, desc: 'YouTube video URL'
     end
     post "/", jbuilder: "v1/videos/show" do
-      @video = @current_user.videos.create!(title: params[:title], url: params[:url])
-      
-      # Send notification when a new video is shared
-      # NotificationJob.perform_later(video)
+      @video = ApisV1::VideoOperations::Create.new(params, @current_user).process
+      @message = "Success"
     end
   end
 end

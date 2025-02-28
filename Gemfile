@@ -31,11 +31,11 @@ group :development, :test do
   gem 'grape_logging'
   gem 'meta_request'
 
-    # Testing
-    gem 'rspec-rails'     
-    gem 'factory_bot_rails'
-    gem 'simplecov'
-    gem 'faker'
+  # Testing
+  gem 'rspec-rails'     
+  gem 'factory_bot_rails'
+  gem 'simplecov'
+  gem 'faker'
 end
 
 group :development do
