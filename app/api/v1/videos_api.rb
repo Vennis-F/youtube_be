@@ -11,7 +11,7 @@ class V1::VideosApi < Grape::API
     # end
     # paginate
     get "/", jbuilder: "v1/videos/index" do
-      @videos = Video.all
+      @videos = Video.includes(:user).all
       @message = "Success"
     end
 

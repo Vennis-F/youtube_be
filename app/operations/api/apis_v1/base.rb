@@ -1,4 +1,4 @@
-class Apis::Base
+class ApisV1::Base
   attr_reader :current_user, :params
 
   # @param params [Hash]
