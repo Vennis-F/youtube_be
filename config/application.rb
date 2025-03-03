@@ -25,6 +25,8 @@ module RemitanoBe
     # -- all .rb files in that directory are automatically loaded.
 
     # Auto-load /bot and its subdirectories
+
+    config.autoload_paths += Dir[Rails.root.join("app", "operations", "*")]
     config.autoload_paths += Dir[Rails.root.join('lib', '**/')]
     config.eager_load_paths << Rails.root.join('lib')
 

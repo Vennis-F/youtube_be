@@ -1,4 +1,4 @@
-class ApisV1::VideoOperations::Create < Apis::Base
+class ApisV1::VideoOperations::Create < ApisV1::Base
   def process
     ActiveRecord::Base.transaction do
       video = current_user.videos.create!(video_params)
